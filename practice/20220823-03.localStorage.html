@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>local Storage json 回上一步資料呈現</title>
+</head>
+<body>
+    <!-- 網頁提供用戶端多頁資料填寫 localstorage作暫存 待用戶端所有資料都填完再一起送出 -->
+
+    <form name="form1" onsubmit="return false;">
+        <input type="text" name="name" placeholder="姓名">
+        <br>
+        <input type="number" name="age" placeholder="年齡">
+        <br>
+        
+        <button type="button" onclick="saveData()">next</button>
+    </form>
+
+    <script>
+        const cacheData = localStorage.getItem('my-key');
+        if(cacheData){
+            const cacheObj = JSON.parse(cacheData);
+            document.form1.name.value = cacheObj.name;
+            document.form1.age.value = cacheObj.age;
+
+        }
+
+
+        function saveData() {
+            const obj = {
+                name: document.form1.name.value,
+                age: document.form1.age.value,
+            };
+            localStorage.setItem('my-key', JSON.stringify(obj));
+            location.href="20220823-02.localStorage.html";
+        }
+
+    </script>
+</body>
+</html>
