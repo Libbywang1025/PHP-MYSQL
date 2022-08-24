@@ -13,7 +13,7 @@ class Person{
     public $name;
     public $age;
 
-    function __construct($name, $age=18)
+    function __construct($name, $age=18)   //沒給參數要放前面
     {
         $this ->name = $name; //把參數（區域變數）設定到屬性
         $this ->age = $age; //把參數（區域變數）設定到屬性
