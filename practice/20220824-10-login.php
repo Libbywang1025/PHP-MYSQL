@@ -7,9 +7,9 @@ if(!empty($_POST) and $_POST['account']=='libby'and $_POST['password']=='1234') 
 
     ];
 }
+
+
 ?>
-
-
 <?php include __DIR__ . '/parts/html-head.php'; ?>
 <?php include __DIR__ . '/parts/navbar.php'; ?>
 <div class="container">
@@ -39,6 +39,7 @@ if(!empty($_POST) and $_POST['account']=='libby'and $_POST['password']=='1234') 
             </div>
             <?php else: ?>
                 <h2><?=$_SESSION['user1']['nickname'].'Hello' ?> </h2>
+                <p><a href="20220825-01-loginout.php">登出</a></p>
                 <?php endif ?>
         </div>
     </div>
