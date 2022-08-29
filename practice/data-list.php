@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/parts/connect-db.php';
 $pageName = 'list'; //頁面名稱
+$title = '資料列表';
 
 $perPage = 5;  //每頁最多有幾筆
 $page = isset($_GET['page']) ? intval(($_GET['page'])) : 1;  //用戶決定要看第幾頁  //if get page就轉換為整數 不然就是page1 
@@ -77,8 +78,6 @@ if ($totalRows > 0) {
                     </li>
                 </ul>
             </nav>
-
-
         </div>
     </div>
     <div class="row">
@@ -100,7 +99,10 @@ if ($totalRows > 0) {
                     <?php foreach ($rows as $r) : ?>
                         <tr>
                             <td>
-                                <a href="javascript: console.log(<?= $r['sid']?>)">
+                                <a href="javascript: removeItem(<?= $r['sid'] ?>)"
+                                data-onclick="event.currentTarget.closest('tr').remove()"> 
+                                <!-- 往上找最近的tr 監聽事件者 -->
+                                <!-- 自訂屬性data 就不是原本的onclick屬性 -->
                                 <i class="fa-solid fa-trash-can"></i>
                                 </a>
                             </td>
@@ -109,9 +111,11 @@ if ($totalRows > 0) {
                             <td><?= $r['email'] ?></td>
                             <td><?= $r['mobile'] ?></td>
                             <td><?= $r['birthday'] ?></td>
-                            <td><?= $r['address'] ?></td>
+                            <!-- html字跳脫 建議用這個 --> 
+                            <td><?= htmlentities($r['address']) ?></td>
+                            <!-- <td><?= strip_tags($r['address']) ?></td> -->
                             <td>
-                                <a href="javascript: ">
+                                <a href="data-edit.php?sid=<?= $r['sid'] ?>">
                                 <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                             </td>
@@ -124,4 +128,12 @@ if ($totalRows > 0) {
 
 </div>
 <?php include __DIR__ . '/parts/scripts.php'; ?>
+<script>
+    //問用戶要不要刪除 要就會連到data-del.php
+    function removeItem(sid){
+        if(confirm(`是否要刪除編號為 ${sid} 的資料？`)){
+            location.href = `data-del.php?sid=${sid}`;
+        }
+    }
+</script>
 <?php include __DIR__ . '/parts/html-foot.php'; ?>
