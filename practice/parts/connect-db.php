@@ -32,3 +32,9 @@ try{
 }
 
 
+
+//如果沒有設定
+if(! isset($_SESSION)){
+    session_start();
+}
+

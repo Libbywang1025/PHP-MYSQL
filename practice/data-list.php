@@ -1,7 +1,8 @@
 <?php
 require __DIR__ . '/parts/connect-db.php';
+$pageName = 'list'; //頁面名稱
 
-$perPage = 2;  //每頁最多有幾筆
+$perPage = 5;  //每頁最多有幾筆
 $page = isset($_GET['page']) ? intval(($_GET['page'])) : 1;  //用戶決定要看第幾頁  //if get page就轉換為整數 不然就是page1 
 
 
@@ -85,23 +86,35 @@ if ($totalRows > 0) {
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
+                        <th scope="col"><i class="fa-solid fa-trash-can"></i></th>
                         <th scope="col">#</th>
                         <th scope="col">姓名</th>
                         <th scope="col">email</th>
                         <th scope="col">mobile</th>
                         <th scope="col">birthday</th>
                         <th scope="col">address</th>
+                        <th scope="col"><i class="fa-solid fa-pen-to-square"></i></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($rows as $r) : ?>
                         <tr>
+                            <td>
+                                <a href="javascript: console.log(<?= $r['sid']?>)">
+                                <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </td>
                             <td><?= $r['sid'] ?></td>
                             <td><?= $r['name'] ?></td>
                             <td><?= $r['email'] ?></td>
                             <td><?= $r['mobile'] ?></td>
                             <td><?= $r['birthday'] ?></td>
                             <td><?= $r['address'] ?></td>
+                            <td>
+                                <a href="javascript: ">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>

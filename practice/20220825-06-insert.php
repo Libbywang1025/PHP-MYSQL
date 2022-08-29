@@ -1,4 +1,3 @@
-
 <?php
 require __DIR__ . '/parts/connect-db.php';
 

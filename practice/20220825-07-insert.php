@@ -2,6 +2,7 @@
 require __DIR__ . '/parts/connect-db.php';
 
 //SQL injection, SQL隱碼攻擊
+//for迴圈建立100筆資料
 $sql = "INSERT INTO `address_book`(
     `name`,
     `email`,
@@ -17,8 +18,11 @@ $sql = "INSERT INTO `address_book`(
     ?,
     NOW()
 )";
+//問號要對應
 
-$stmt = $pdo->prepare($sql);  //不會拿到結果
+$stmt = $pdo->prepare($sql);  //不會拿到結果  //prepare一次就可以
+
+//執行
 $stmt -> execute([
     'banana',
     'aaa@gmail.com',
