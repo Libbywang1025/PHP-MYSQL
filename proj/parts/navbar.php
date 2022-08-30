@@ -22,7 +22,9 @@
                         <a class="nav-link <?= $pageName == 'list' ? 'active' : '' ?>" href="product-list.php">商品資料列表</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $pageName == 'insert' ? 'active' : '' ?>" href="data-insert.php">新增資料</a>
+                        <a class="nav-link <?= $pageName == 'insert' ? 'active' : '' ?>" href="cart.php">購物車
+                        <span class="badge text-bg-danger" id="cartCount" ></span>
+                    </a>
                     </li>
                 </ul>
 
@@ -51,3 +53,24 @@
         </div>
     </nav>
 </div>
+<script>
+    function showCartCount(obj){
+        let count = 0;
+
+        for(let k in obj){
+            const item = obj[k];
+            count += +item.qty; //+是轉換類型 數量加總
+            //count ++ +item.qty; //項目加總
+
+        }
+        $('#cartCount').html(count);
+    }
+
+    //每進到頁面就發一次ajax
+    $.get(
+            'handle-cart.php', //要送給誰  
+            function(data){//callback function
+                showCartCount(data);
+            },
+            'json');  //第四個參數：轉換為json格式;
+</script>

@@ -22,7 +22,7 @@ $sql = sprintf("INSERT INTO `members`(
         '1995-01-23',
 
         'abc',
-        '1',
+        '1', 
         '$nickname',
         NOW()
     )", password_hash($pass, PASSWORD_DEFAULT));
