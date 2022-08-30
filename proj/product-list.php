@@ -102,21 +102,24 @@ if ($totalRows > 0) {
             <?php $btnStyle = (!$lowp && $highp == 400) ? 'btn-primary' : 'btn-outline-primary' //沒有設定高價格或低價格就是反白
             ?>
 
-            <a type="button" class="btn <?= $btnStyle ?>" href="?<?php
-                                                                    $tmp = $qsp;
-                                                                    unset($tmp['lowp']);
-                                                                    $tmp['highp'] = 400;
-                                                                    echo http_build_query($tmp); ?>">~400</a>
+            <a type="button" class="btn <?= $btnStyle ?>" 
+                href="?<?php
+                $tmp = $qsp;
+                unset($tmp['lowp']);
+                $tmp['highp'] = 400;
+                echo http_build_query($tmp); ?>">~400</a>
 
             <?php $btnStyle = ($lowp == 400 && $highp == 500) ? 'btn-primary' : 'btn-outline-primary' ?>
-            <a type="button" class="btn <?= $btnStyle ?>" href="?<?php $tmp['lowp'] = 400;
-                                                                    $tmp['highp'] = 500;
-                                                                    echo http_build_query($tmp); ?>">400~500</a>
+            <a type="button" class="btn <?= $btnStyle ?>" 
+                href="?<?php $tmp['lowp'] = 400;
+                $tmp['highp'] = 500;
+                echo http_build_query($tmp); ?>">400~500</a>
 
             <?php $btnStyle = ($lowp == 500 && !$highp) ? 'btn-primary' : 'btn-outline-primary' ?>
-            <a type="button" class="btn <?= $btnStyle ?>" href="?<?php unset($tmp['highp']);
-                                                                    $tmp['lowp'] = 500;
-                                                                    echo http_build_query($tmp); ?>">500~</a>
+            <a type="button" class="btn <?= $btnStyle ?>" 
+                href="?<?php unset($tmp['highp']);
+                $tmp['lowp'] = 500;
+                echo http_build_query($tmp); ?>">500~</a>
         </div>
     </div>
 
@@ -125,8 +128,9 @@ if ($totalRows > 0) {
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item <?= $page == 1 ? 'disabled' : '' ?> ">
-                        <a class="page-link" href="?<?php $qsp['page'] = $page - 1;
-                                                    echo http_build_query($qsp); ?> ">
+                        <a class="page-link" 
+                            href="?<?php $qsp['page'] = $page - 1;
+                            echo http_build_query($qsp); ?> ">
                             <i class="fa-solid fa-circle-arrow-left"></i>
                         </a>
                     </li>
@@ -143,8 +147,9 @@ if ($totalRows > 0) {
                     <?php endif;
                     endfor; ?>
                     <li class="page-item <?= $page == $totalPages ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?<?php $qsp['page'] = $page + 1;
-                                                    echo http_build_query($qsp); ?> ">
+                        <a class="page-link" 
+                            href="?<?php $qsp['page'] = $page + 1;
+                            echo http_build_query($qsp); ?> ">
                             <i class="fa-solid fa-circle-arrow-right"></i>
                         </a>
                     </li>

@@ -33,9 +33,11 @@ $pageName = 'cart'; //頁面名稱
                         foreach ($_SESSION['cart'] as $k => $v) :
                             $total += $v['price'] * $v['qty']; //計算總價格
                         ?>
-                            <tr>
+                            <tr data-sid="<?= $k ?>">
                                 <td>
-                                    <i class="fa-solid fa-trash-can"></i>
+                                    <a href="javascript:" onclick="removeItem(event)">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
                                 </td>
                                 <td> <?= $k ?></td>
                                 <td>
@@ -44,7 +46,7 @@ $pageName = 'cart'; //頁面名稱
                                 <td><?= $v['bookname'] ?></td>
                                 <td><?= $v['price'] ?></td>
                                 <td>
-                                    <select class="form-select">
+                                    <select class="form-select" onchange="updateItem(event)">
                                         <?php for ($i = 1; $i <= 10; $i++) : ?>
                                             <option value="<?= $i ?>" <?= $i == $v['qty'] ? 'selected' : '' ?>> <?= $i ?></option>
                                         <?php endfor; ?>
@@ -65,5 +67,37 @@ $pageName = 'cart'; //頁面名稱
 
 
 </div>
+
 <?php include __DIR__ . '/parts/scripts.php'; ?>
+<script>
+    function removeItem(event){
+        const tr =  $(event.currentTarget).closest('tr');
+        const sid = tr.attr('data-sid');
+
+        $.get(
+        'handle-cart.php',
+        {sid},
+        function(data){
+            console.log(data);
+            showCartCount(data); //總數量
+            //TODO:更新小計，總計，總數量
+            tr.remove();
+        },
+        'json'
+        );
+        
+        
+    }
+    function updateItem(event){
+        const sid = $(event.currentTarget).closest('tr').attr('data-sid');
+        const qty = $(event.currentTarget).val();
+        $.get('handle-cart.php',
+        {sid,qty},
+        function(data){
+            console.log(data);
+            showCartCount(data);
+        },
+        'json');
+    }
+</script>
 <?php include __DIR__ . '/parts/html-foot.php'; ?>
