@@ -78,20 +78,21 @@ if ($totalRows > 0) {
     <div class="row">
         <div class="col">
             <?php $allBtnStyle = empty($cate) ? 'btn-primary' : 'btn-outline-primary' ?>
-            <a type="button" class="btn <?= $allBtnStyle ?>" href="?<?php
-                                                                    $tmp = $qsp; //複製
-                                                                    unset($tmp['cate']); //清空類別
-                                                                    unset($tmp['lowp']); //清空低價
-                                                                    unset($tmp['highp']);
-                                                                    echo http_build_query($tmp); ?>">全部</a>
+            <a type="button" class="btn <?= $allBtnStyle ?>" 
+                href="?<?php
+                $tmp = $qsp; //複製
+                unset($tmp['cate']); //清空類別
+                unset($tmp['lowp']); //清空低價
+                unset($tmp['highp']);
+                echo http_build_query($tmp); ?>">全部</a>
             <?php foreach ($cates as $c) :
                 $btnStyle = $c['sid'] == $cate ? 'btn-primary' : 'btn-outline-primary'
             ?>
-                <a type="button" class="btn <?= $btnStyle ?>" href="?<?php
-                                                                        $tmp['cate'] = $c['sid'];
-                                                                        echo http_build_query($tmp); ?>">
-                    <?= $c['name'] ?>
-                </a>
+            <a type="button" class="btn <?= $btnStyle ?>" 
+                href="?<?php
+                $tmp['cate'] = $c['sid'];
+                echo http_build_query($tmp); ?>"><?= $c['name'] ?>
+            </a>
             <?php endforeach ?>
         </div>
     </div>
