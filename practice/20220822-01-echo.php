@@ -16,14 +16,13 @@
     echo '<br>';
     echo 2+3;
     echo '<br>';
-    echo 0xFF. '<br>';  //字串串接
+    echo 0xFF. '<br>';  //.字串串接
     echo TRUE. '<br>';  #布林值不區分大小寫
     echo faLSE. '<br>';  #布林值不區分大小寫
     echo Null. '<br>';  #空值不區分大小寫
     echo '--------<br>';
     echo MY_CONST.'<br>';
 ?>
-
 
 
 </body>
